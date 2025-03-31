@@ -49,11 +49,11 @@ public class ItemDataLoader : MonoBehaviour
 
             Debug.Log($"로드된 아이템 수 : {itemList.Count}");
 
-            foreach (var item in itemList)
+           // foreach (var item in itemList)
             {
-                Debug.Log($"아이템 : {EncodeKorean(item.itemName)}, 설명 : {EncodeKorean(item.description)}");
+               // Debug.Log($"아이템 : {EncodeKorean(item.itemName)}, 설명 : {EncodeKorean(item.description)}");
             }
-            else
+            //else
             {
                 Debug.LogError($"JSON 파일을 찾을수 없습니다. : {jsonFileName}");
             }

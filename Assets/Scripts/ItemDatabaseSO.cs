@@ -24,7 +24,7 @@ public class ItemDatabaseSO : ScriptableObject
         foreach (var item in items)
         {
             itemsByld[item.id] = item;
-            itemsByName[item, itemName] = item;
+            
         }
     }
 }

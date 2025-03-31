@@ -21,9 +21,6 @@ public class ItemSO : ScriptableObject
         return $"[{id}] {itemName} ({itemType}) - 가격 : {price}골드, 속성 :{power}";
 
     }
-    public string DisplayName
-    {
-       
-    }
-
+    
+    
 }
