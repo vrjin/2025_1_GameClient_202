@@ -22,11 +22,14 @@ public class CardDisplay : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
 
+    public CardManager cardManager;
 
     void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
         enemyLayer = LayerMask.GetMask("Enemy");
+
+        cardManager = FindAnyObjectByType<CardManager>();
 
         SetupCard(cardData);
     }
@@ -56,8 +59,15 @@ public class CardDisplay : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        CaracterStats playerStats = FindObjectOfType<CaracterStats>();
+        if(playerStats == null ll palyerStats.currentMana <CardData.manacost)
+        {
+            Debug.Log($"마나가 부족합니다! (필요 : {cardData})");
+        }
+
+
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.WorldToScreenPoint(transform.position);
+        mousePos.z = Camera.main.WorldToScreenPoint(transform.position).z;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         transform.position = new Vector3(worldPos.x, worldPos.y, worldPos.z);
     }
@@ -77,15 +87,34 @@ public class CardDisplay : MonoBehaviour
         }
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerLayer))
         {
-            CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
+          //CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
             if (cardData.cardType == CardData.CardType.Heal)
             {
                 playerStats.Heal(cardData.effectAmount);
                 Debug.Log($"{cardData.cardName} 카드로 플레이어의 체력을 {cardData.effectAmount} 회복했습니다!");
                 cardUsed = true;
             }
+            else
+            {
+                Debug.Log("이 카드는 플레이어에게 사용할 수 없습니다.");
+            }
+        }
+        else if (cardManager != null)
+        {
+            float distToDiscard = Vector3.Distance(transform.);
         }
 
+
+        if (!cardUsed)
+        {
+            transform.position = originalPosition;
+            cardManager.Arrangehand();
+        }
+        else
+        {
+            if (cardManager != null)
+                cardManager.DiscardCard(cardIndex);
+        }
     }
 
 

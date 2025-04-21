@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 
 public class CaracterStats : MonoBehaviour
 {
@@ -28,4 +30,16 @@ public class CaracterStats : MonoBehaviour
     {
         currentHealth += amount;
     }
+
+    public void UseMana(int amoint)
+    {
+        currentMana -= amoint;
+        if (CurrentMana < 0)
+        {
+            currentMana = 0;
+        }
+        UpdateUI();
+    }
+
+
 }
